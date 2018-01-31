@@ -168,7 +168,7 @@ var tootjs;
         }
     }
     tootjs.Mastodon = Mastodon;
-})(tootjs || (tootjs = {}));
+})(tootjs = exports.tootjs || (exports.tootjs = {}));
 
 
 /***/ }),
