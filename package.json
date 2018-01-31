@@ -3,6 +3,7 @@
   "version": "0.0.4",
   "description": "Mastodon Library for Browser and Server side",
   "main": "dist/bundle.js",
+  "types": "dist/index.d.ts",
   "scripts": {
     "webpack": "webpack"
   },
