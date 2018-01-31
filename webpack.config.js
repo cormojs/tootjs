@@ -1,7 +1,7 @@
 module.exports = {
-    entry: ["./src/index.ts", "./src/types.ts"],
+    entry: ["./src/tootjs.ts", "./src/types.ts"],
     output: {
-      filename: "index.js",
+      filename: "tootjs.js",
       path: __dirname + "/dist"
     },
   

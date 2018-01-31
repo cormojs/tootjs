@@ -1,9 +1,9 @@
 {
   "name": "tootjs",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Mastodon Library for Browser and Server side",
-  "main": "dist/bundle.js",
-  "types": "dist/types.d.ts",
+  "main": "dist/tootjs.js",
+  "types": "dist/tootjs.d.ts",
   "scripts": {
     "webpack": "webpack"
   },
