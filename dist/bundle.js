@@ -97,12 +97,20 @@ module.exports = g;
 "use strict";
 
 
-exports.decode = exports.parse = __webpack_require__(10);
-exports.encode = exports.stringify = __webpack_require__(11);
+exports.decode = exports.parse = __webpack_require__(11);
+exports.encode = exports.stringify = __webpack_require__(12);
 
 
 /***/ }),
 /* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+__webpack_require__(3);
+module.exports = __webpack_require__(18);
+
+
+/***/ }),
+/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -116,64 +124,67 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const fetch = __webpack_require__(3);
-const OAuth2 = __webpack_require__(5);
-class Mastodon {
-    constructor(config) {
-        this.config = config;
-        this.config.api_base = config.api_base ? config.api_base : "/api/v1/";
-        this.config.redirect_to = config.redirect_to ? config.redirect_to : "urn:ietf:wg:oauth:2.0:oob";
+const fetch = __webpack_require__(4);
+const OAuth2 = __webpack_require__(6);
+var tootjs;
+(function (tootjs) {
+    class Mastodon {
+        constructor(config) {
+            this.config = config;
+            this.config.api_base = config.api_base ? config.api_base : "/api/v1/";
+            this.config.redirect_to = config.redirect_to ? config.redirect_to : "urn:ietf:wg:oauth:2.0:oob";
+        }
+        registerApp(clientName) {
+            return __awaiter(this, void 0, void 0, function* () {
+                let url = `https://${this.config.host}${this.config.api_base}apps`;
+                let params = new URLSearchParams();
+                params.set('client_name', clientName);
+                params.set('redirect_uris', this.config.redirect_to);
+                params.set("scope", this.config.scope);
+                let resp = yield fetch(`url?${params.toString()}`, { method: "post", });
+                let json = yield resp.json();
+                this.config.registration = json;
+                return json;
+            });
+        }
+        getAuthUrl() {
+            this.auth = new OAuth2({
+                clientId: this.config.registration.client_id,
+                clientSecret: this.config.registration.client_secret,
+                scopes: this.config.scope.split(' '),
+                authorizationUri: `${this.config.host}/oauth/authorize`,
+            });
+            return this.auth.token.getUri();
+        }
+        // public setAccessToken(code: string): this
+        get(api, opts) {
+            return __awaiter(this, void 0, void 0, function* () {
+                let params = new URLSearchParams();
+                for (let k in opts)
+                    params.set(k, opts[k]);
+                let f = yield fetch(`${this.config.host}${this.config.api_base}${api}${params.toString()}`);
+                return f.json;
+            });
+        }
     }
-    registerApp(clientName) {
-        return __awaiter(this, void 0, void 0, function* () {
-            let url = `https://${this.config.host}${this.config.api_base}apps`;
-            let params = new URLSearchParams();
-            params.set('client_name', clientName);
-            params.set('redirect_uris', this.config.redirect_to);
-            params.set("scope", this.config.scope);
-            let resp = yield fetch(`url?${params.toString()}`, { method: "post", });
-            let json = yield resp.json();
-            this.config.registration = json;
-            return json;
-        });
-    }
-    getAuthUrl() {
-        this.auth = new OAuth2({
-            clientId: this.config.registration.client_id,
-            clientSecret: this.config.registration.client_secret,
-            scopes: this.config.scope.split(' '),
-            authorizationUri: `${this.config.host}/oauth/authorize`,
-        });
-        return this.auth.token.getUri();
-    }
-    // public setAccessToken(code: string): this
-    get(api, opts) {
-        return __awaiter(this, void 0, void 0, function* () {
-            let params = new URLSearchParams();
-            for (let k in opts)
-                params.set(k, opts[k]);
-            let f = yield fetch(`${this.config.host}${this.config.api_base}${api}${params.toString()}`);
-            return f.json;
-        });
-    }
-}
-exports.Mastodon = Mastodon;
+    tootjs.Mastodon = Mastodon;
+})(tootjs || (tootjs = {}));
 
 
 /***/ }),
-/* 3 */
+/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // the whatwg-fetch polyfill installs the fetch() function
 // on the global object (window or self)
 //
 // Return that as the export for use in Webpack, Browserify etc.
-__webpack_require__(4);
+__webpack_require__(5);
 module.exports = self.fetch.bind(self);
 
 
 /***/ }),
-/* 4 */
+/* 5 */
 /***/ (function(module, exports) {
 
 (function(self) {
@@ -640,12 +651,12 @@ module.exports = self.fetch.bind(self);
 
 
 /***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(Buffer) {var Querystring = __webpack_require__(1)
-var Url = __webpack_require__(12)
-var defaultRequest = __webpack_require__(16)
+var Url = __webpack_require__(13)
+var defaultRequest = __webpack_require__(17)
 
 var btoa = typeof Buffer === 'function' ? btoaBuffer : window.btoa
 
@@ -1320,10 +1331,10 @@ JwtBearerFlow.prototype.getToken = function (token, opts) {
     })
 }
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6).Buffer))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7).Buffer))
 
 /***/ }),
-/* 6 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1337,9 +1348,9 @@ JwtBearerFlow.prototype.getToken = function (token, opts) {
 
 
 
-var base64 = __webpack_require__(7)
-var ieee754 = __webpack_require__(8)
-var isArray = __webpack_require__(9)
+var base64 = __webpack_require__(8)
+var ieee754 = __webpack_require__(9)
+var isArray = __webpack_require__(10)
 
 exports.Buffer = Buffer
 exports.SlowBuffer = SlowBuffer
@@ -3120,7 +3131,7 @@ function isnan (val) {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 7 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3241,7 +3252,7 @@ function fromByteArray (uint8) {
 
 
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ (function(module, exports) {
 
 exports.read = function (buffer, offset, isLE, mLen, nBytes) {
@@ -3331,7 +3342,7 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
 
 
 /***/ }),
-/* 9 */
+/* 10 */
 /***/ (function(module, exports) {
 
 var toString = {}.toString;
@@ -3342,7 +3353,7 @@ module.exports = Array.isArray || function (arr) {
 
 
 /***/ }),
-/* 10 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3433,7 +3444,7 @@ var isArray = Array.isArray || function (xs) {
 
 
 /***/ }),
-/* 11 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3525,7 +3536,7 @@ var objectKeys = Object.keys || function (obj) {
 
 
 /***/ }),
-/* 12 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3552,8 +3563,8 @@ var objectKeys = Object.keys || function (obj) {
 
 
 
-var punycode = __webpack_require__(13);
-var util = __webpack_require__(15);
+var punycode = __webpack_require__(14);
+var util = __webpack_require__(16);
 
 exports.parse = urlParse;
 exports.resolve = urlResolve;
@@ -4264,7 +4275,7 @@ Url.prototype.parseHost = function() {
 
 
 /***/ }),
-/* 13 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(module, global) {var __WEBPACK_AMD_DEFINE_RESULT__;/*! https://mths.be/punycode v1.4.1 by @mathias */
@@ -4800,10 +4811,10 @@ Url.prototype.parseHost = function() {
 
 }(this));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(14)(module), __webpack_require__(0)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(15)(module), __webpack_require__(0)))
 
 /***/ }),
-/* 14 */
+/* 15 */
 /***/ (function(module, exports) {
 
 module.exports = function(module) {
@@ -4831,7 +4842,7 @@ module.exports = function(module) {
 
 
 /***/ }),
-/* 15 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4854,7 +4865,7 @@ module.exports = {
 
 
 /***/ }),
-/* 16 */
+/* 17 */
 /***/ (function(module, exports) {
 
 /**
@@ -4890,6 +4901,15 @@ module.exports = function request (method, url, body, headers) {
     xhr.send(body)
   })
 }
+
+
+/***/ }),
+/* 18 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
 
 
 /***/ })
