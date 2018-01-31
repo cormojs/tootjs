@@ -165,7 +165,7 @@ class Mastodon {
         });
     }
 }
-exports.default = Mastodon;
+exports.Mastodon = Mastodon;
 
 
 /***/ }),

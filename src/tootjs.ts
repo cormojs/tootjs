@@ -4,7 +4,7 @@ import * as OAuth2 from 'client-oauth2'
 
 
 
-export default class Mastodon {
+export class Mastodon {
     private config: Config
     private auth: OAuth2
 

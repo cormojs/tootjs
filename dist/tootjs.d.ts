@@ -1,5 +1,5 @@
 import { Config, Registration } from './types';
-export default class Mastodon {
+export declare class Mastodon {
     private config;
     private auth;
     constructor(config: Config);
