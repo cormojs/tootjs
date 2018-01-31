@@ -1,0 +1,27 @@
+{
+  "name": "tootjs",
+  "version": "0.0.1",
+  "description": "Mastodon Library for Browser and Server side",
+  "main": "src/index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cormojs/tootjs.git"
+  },
+  "keywords": [
+    "mastodon"
+  ],
+  "author": "Cormo",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cormojs/tootjs/issues"
+  },
+  "homepage": "https://github.com/cormojs/tootjs#readme",
+  "dependencies": {
+    "@types/isomorphic-fetch": "0.0.34",
+    "client-oauth2": "^4.1.0",
+    "isomorphic-fetch": "^2.2.1"
+  }
+}
