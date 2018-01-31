@@ -126,49 +126,46 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const fetch = __webpack_require__(4);
 const OAuth2 = __webpack_require__(6);
-var tootjs;
-(function (tootjs) {
-    class Mastodon {
-        constructor(config) {
-            this.config = config;
-            this.config.api_base = config.api_base ? config.api_base : "/api/v1/";
-            this.config.redirect_to = config.redirect_to ? config.redirect_to : "urn:ietf:wg:oauth:2.0:oob";
-        }
-        registerApp(clientName) {
-            return __awaiter(this, void 0, void 0, function* () {
-                let url = `https://${this.config.host}${this.config.api_base}apps`;
-                let params = new URLSearchParams();
-                params.set('client_name', clientName);
-                params.set('redirect_uris', this.config.redirect_to);
-                params.set("scope", this.config.scope);
-                let resp = yield fetch(`url?${params.toString()}`, { method: "post", });
-                let json = yield resp.json();
-                this.config.registration = json;
-                return json;
-            });
-        }
-        getAuthUrl() {
-            this.auth = new OAuth2({
-                clientId: this.config.registration.client_id,
-                clientSecret: this.config.registration.client_secret,
-                scopes: this.config.scope.split(' '),
-                authorizationUri: `${this.config.host}/oauth/authorize`,
-            });
-            return this.auth.token.getUri();
-        }
-        // public setAccessToken(code: string): this
-        get(api, opts) {
-            return __awaiter(this, void 0, void 0, function* () {
-                let params = new URLSearchParams();
-                for (let k in opts)
-                    params.set(k, opts[k]);
-                let f = yield fetch(`${this.config.host}${this.config.api_base}${api}${params.toString()}`);
-                return f.json;
-            });
-        }
+class Mastodon {
+    constructor(config) {
+        this.config = config;
+        this.config.api_base = config.api_base ? config.api_base : "/api/v1/";
+        this.config.redirect_to = config.redirect_to ? config.redirect_to : "urn:ietf:wg:oauth:2.0:oob";
     }
-    tootjs.Mastodon = Mastodon;
-})(tootjs = exports.tootjs || (exports.tootjs = {}));
+    registerApp(clientName) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let url = `https://${this.config.host}${this.config.api_base}apps`;
+            let params = new URLSearchParams();
+            params.set('client_name', clientName);
+            params.set('redirect_uris', this.config.redirect_to);
+            params.set("scope", this.config.scope);
+            let resp = yield fetch(`url?${params.toString()}`, { method: "post", });
+            let json = yield resp.json();
+            this.config.registration = json;
+            return json;
+        });
+    }
+    getAuthUrl() {
+        this.auth = new OAuth2({
+            clientId: this.config.registration.client_id,
+            clientSecret: this.config.registration.client_secret,
+            scopes: this.config.scope.split(' '),
+            authorizationUri: `${this.config.host}/oauth/authorize`,
+        });
+        return this.auth.token.getUri();
+    }
+    // public setAccessToken(code: string): this
+    get(api, opts) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let params = new URLSearchParams();
+            for (let k in opts)
+                params.set(k, opts[k]);
+            let f = yield fetch(`${this.config.host}${this.config.api_base}${api}${params.toString()}`);
+            return f.json;
+        });
+    }
+}
+exports.default = Mastodon;
 
 
 /***/ }),
