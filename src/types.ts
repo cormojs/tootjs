@@ -1,5 +1,6 @@
 export interface Config {
     host: string
+    scope: string
     api_base?: string
     redirect_to?: string
     proxy?: string
