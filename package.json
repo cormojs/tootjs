@@ -1,6 +1,6 @@
 {
   "name": "tootjs",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Mastodon Library for Browser and Server side",
   "main": "dist/bundle.js",
   "scripts": {
