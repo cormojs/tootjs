@@ -9,7 +9,10 @@
       "jsx": "react",
       "alwaysStrict": true,
       "declaration": true,
-      "declarationDir": "./dist/"
+      "declarationDir": "./dist/",
+      "lib":[
+        "es2015", "dom"
+      ]
     },
     "include": [
       "./src/**/*"
