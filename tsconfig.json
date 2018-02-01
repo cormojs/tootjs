@@ -1,6 +1,6 @@
 {
     "compilerOptions": {
-      "typeRoots": ["node_modules/@types", "types"],    
+      "typeRoots": ["node_modules/@types"],    
       "outDir": "./dist/",
       "sourceMap": true,
       "noImplicitAny": true,
@@ -8,7 +8,8 @@
       "target": "es2015",
       "jsx": "react",
       "alwaysStrict": true,
-      "declaration": true
+      "declaration": true,
+      "declarationDir": "./dist/"
     },
     "include": [
       "./src/**/*"

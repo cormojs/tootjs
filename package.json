@@ -1,6 +1,6 @@
 {
   "name": "tootjs",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "Mastodon Library for Browser and Server side",
   "main": "dist/tootjs.js",
   "typings": "dist/tootjs.d.ts",

@@ -97,20 +97,12 @@ module.exports = g;
 "use strict";
 
 
-exports.decode = exports.parse = __webpack_require__(11);
-exports.encode = exports.stringify = __webpack_require__(12);
+exports.decode = exports.parse = __webpack_require__(10);
+exports.encode = exports.stringify = __webpack_require__(11);
 
 
 /***/ }),
 /* 2 */
-/***/ (function(module, exports, __webpack_require__) {
-
-__webpack_require__(3);
-module.exports = __webpack_require__(18);
-
-
-/***/ }),
-/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -124,8 +116,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const fetch = __webpack_require__(4);
-const OAuth2 = __webpack_require__(6);
+const fetch = __webpack_require__(3);
+const OAuth2 = __webpack_require__(5);
 class Mastodon {
     constructor(config) {
         this.config = config;
@@ -169,19 +161,19 @@ exports.Mastodon = Mastodon;
 
 
 /***/ }),
-/* 4 */
+/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // the whatwg-fetch polyfill installs the fetch() function
 // on the global object (window or self)
 //
 // Return that as the export for use in Webpack, Browserify etc.
-__webpack_require__(5);
+__webpack_require__(4);
 module.exports = self.fetch.bind(self);
 
 
 /***/ }),
-/* 5 */
+/* 4 */
 /***/ (function(module, exports) {
 
 (function(self) {
@@ -648,12 +640,12 @@ module.exports = self.fetch.bind(self);
 
 
 /***/ }),
-/* 6 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(Buffer) {var Querystring = __webpack_require__(1)
-var Url = __webpack_require__(13)
-var defaultRequest = __webpack_require__(17)
+var Url = __webpack_require__(12)
+var defaultRequest = __webpack_require__(16)
 
 var btoa = typeof Buffer === 'function' ? btoaBuffer : window.btoa
 
@@ -1328,10 +1320,10 @@ JwtBearerFlow.prototype.getToken = function (token, opts) {
     })
 }
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7).Buffer))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6).Buffer))
 
 /***/ }),
-/* 7 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1345,9 +1337,9 @@ JwtBearerFlow.prototype.getToken = function (token, opts) {
 
 
 
-var base64 = __webpack_require__(8)
-var ieee754 = __webpack_require__(9)
-var isArray = __webpack_require__(10)
+var base64 = __webpack_require__(7)
+var ieee754 = __webpack_require__(8)
+var isArray = __webpack_require__(9)
 
 exports.Buffer = Buffer
 exports.SlowBuffer = SlowBuffer
@@ -3128,7 +3120,7 @@ function isnan (val) {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 8 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3249,7 +3241,7 @@ function fromByteArray (uint8) {
 
 
 /***/ }),
-/* 9 */
+/* 8 */
 /***/ (function(module, exports) {
 
 exports.read = function (buffer, offset, isLE, mLen, nBytes) {
@@ -3339,7 +3331,7 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
 
 
 /***/ }),
-/* 10 */
+/* 9 */
 /***/ (function(module, exports) {
 
 var toString = {}.toString;
@@ -3350,7 +3342,7 @@ module.exports = Array.isArray || function (arr) {
 
 
 /***/ }),
-/* 11 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3441,7 +3433,7 @@ var isArray = Array.isArray || function (xs) {
 
 
 /***/ }),
-/* 12 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3533,7 +3525,7 @@ var objectKeys = Object.keys || function (obj) {
 
 
 /***/ }),
-/* 13 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3560,8 +3552,8 @@ var objectKeys = Object.keys || function (obj) {
 
 
 
-var punycode = __webpack_require__(14);
-var util = __webpack_require__(16);
+var punycode = __webpack_require__(13);
+var util = __webpack_require__(15);
 
 exports.parse = urlParse;
 exports.resolve = urlResolve;
@@ -4272,7 +4264,7 @@ Url.prototype.parseHost = function() {
 
 
 /***/ }),
-/* 14 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(module, global) {var __WEBPACK_AMD_DEFINE_RESULT__;/*! https://mths.be/punycode v1.4.1 by @mathias */
@@ -4808,10 +4800,10 @@ Url.prototype.parseHost = function() {
 
 }(this));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(15)(module), __webpack_require__(0)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(14)(module), __webpack_require__(0)))
 
 /***/ }),
-/* 15 */
+/* 14 */
 /***/ (function(module, exports) {
 
 module.exports = function(module) {
@@ -4839,7 +4831,7 @@ module.exports = function(module) {
 
 
 /***/ }),
-/* 16 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4862,7 +4854,7 @@ module.exports = {
 
 
 /***/ }),
-/* 17 */
+/* 16 */
 /***/ (function(module, exports) {
 
 /**
@@ -4898,15 +4890,6 @@ module.exports = function request (method, url, body, headers) {
     xhr.send(body)
   })
 }
-
-
-/***/ }),
-/* 18 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
 
 
 /***/ })
