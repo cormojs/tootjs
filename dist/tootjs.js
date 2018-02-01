@@ -153,7 +153,7 @@ class Mastodon {
             for (let k in opts)
                 params.set(k, opts[k]);
             let f = yield fetch(`${this.config.host}${this.config.api_base}${api}${params.toString()}`);
-            return f.json;
+            return f.json();
         });
     }
 }
