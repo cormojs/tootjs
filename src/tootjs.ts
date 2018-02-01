@@ -42,7 +42,7 @@ export class Mastodon {
         let params = new URLSearchParams()
         for (let k in opts)
             params.set(k, opts[k]);
-        let f = await fetch(`${this.config.host}${this.config.api_base}${api}${params.toString()}`)
+        let f = await fetch(`https://${this.config.host}${this.config.api_base}${api}${params.toString()}`)
         return f.json()
     }
     // public post(api: string, params: { string?: string }): Promise<Result>
