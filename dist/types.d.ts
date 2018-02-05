@@ -5,6 +5,7 @@ export interface Config {
     redirect_to?: string;
     proxy?: string;
     registration?: Registration;
+    access_token?: string;
 }
 export interface Registration {
     id: string;
