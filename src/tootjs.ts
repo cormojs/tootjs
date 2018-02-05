@@ -44,7 +44,7 @@ export class Mastodon {
             params.set(k, opts[k]);
         
         let f = await fetch(`https://${this.config.host}${this.config.api_base}${api}${params.toString()}`,
-                            { headers: new Headers({ "Bearer": this.config.access_token })})
+                            { headers: new Headers({ "Authorization": `Bearer ${this.config.access_token}` })})
         return f.json()
     }
     // public post(api: string, params: { string?: string }): Promise<Result>
