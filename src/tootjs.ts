@@ -42,7 +42,7 @@ export class Mastodon {
         let params = new URLSearchParams()
         for (let k in opts)
             params.set(k, opts[k]);
-        let q = opts.entries.length === 0 ? "" : "?"
+        let q = Object.keys(opts).length === 0  ? "" : "?"
         let f = await fetch(`https://${this.config.host}${this.config.api_base}${api}${q}${params.toString()}`,
                             { headers: new Headers({ "Authorization": `Bearer ${this.config.access_token}` })})
         return f.json()
