@@ -152,7 +152,8 @@ class Mastodon {
             let params = new URLSearchParams();
             for (let k in opts)
                 params.set(k, opts[k]);
-            let f = yield fetch(`https://${this.config.host}${this.config.api_base}${api}${params.toString()}`, { headers: new Headers({ "Authorization": `Bearer ${this.config.access_token}` }) });
+            let q = opts.entries.length === 0 ? "" : "?";
+            let f = yield fetch(`https://${this.config.host}${this.config.api_base}${api}${q}${params.toString()}`, { headers: new Headers({ "Authorization": `Bearer ${this.config.access_token}` }) });
             return f.json();
         });
     }
