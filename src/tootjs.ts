@@ -56,7 +56,7 @@ export class Mastodon {
   }
 
   public stream(kind: string, eventEmitter: EventEmitter): WebSocket {
-    var socket = new WebSocket(`wss://${this.config.host}${this.config.api_base}streaming/?stream=${kind}`)
+    var socket = new WebSocket(`wss://${this.config.host}${this.config.api_base}streaming/?stream=${kind}&access_token=${this.config.access_token}`)
     socket.addEventListener('message', event => {
       var data = JSON.parse(event.data)
       var dataEvent = data.event
