@@ -5,7 +5,9 @@ module.exports = {
     },
     output: {
       filename: "[name].js",
-      path: __dirname + "/dist"
+      path: __dirname + "/dist",
+      library: "tootjs",
+      libraryTarget: "umd"
     },
   
     // Enable sourcemaps for debugging webpack's output.
