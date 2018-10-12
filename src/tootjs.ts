@@ -55,8 +55,12 @@ export class Mastodon {
     })
   }
 
-  public stream(kind: string, eventEmitter: EventEmitter): WebSocket {
-    var socket = new WebSocket(`wss://${this.config.host}${this.config.api_base}streaming/?stream=${kind}&access_token=${this.config.access_token}`)
+  public stream(kind: string, query: { [key:string]: string }, eventEmitter: EventEmitter): WebSocket {
+    let params = new URLSearchParams()
+    for (let k in query)
+      params.set(k, query[k]);
+    let q = Object.keys(query).length === 0  ? "" : "&"
+    var socket = new WebSocket(`wss://${this.config.host}${this.config.api_base}streaming/?stream=${kind}&access_token=${this.config.access_token}${q}${params.toString()}`)
     socket.addEventListener('message', event => {
       var data = JSON.parse(event.data)
       var dataEvent = data.event
