@@ -47,12 +47,17 @@ export class Mastodon {
     let result = await f.json() as T
     return result
   }
-  public async post(api: string, body: { [key: string]: string }): Promise<Response> {
-    return fetch(`https://${this.config.host}${this.config.api_base}${api}`, {
+  public async post<T>(api: string, body: { [key: string]: string }): Promise<T> {
+    let params = new URLSearchParams()
+    for (let k in body)
+      params.set(k, body[k]);
+    let f = await fetch(`https://${this.config.host}${this.config.api_base}${api}`, {
       method: "POST",
-      body: JSON.stringify(body),
+      body: params,
       headers: new Headers({ "Authorization": `Bearer ${this.config.access_token}`})
     })
+    let result = await f.json() as T
+    return result
   }
 
   public stream(kind: string, query: { [key:string]: string }, eventEmitter: EventEmitter): WebSocket {
